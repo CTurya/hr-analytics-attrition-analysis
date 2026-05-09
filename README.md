@@ -53,6 +53,4 @@ Coming soon — built in Looker Studio
 ---
 
 ## 👩🏽‍💻 Author
-Charlotte Turyahikayo
-Information Officer & Director | Founder, Amani Nzuri
-www.linkedin.com/in/charlotte-t-457bb8200
+Charlotte Turya
