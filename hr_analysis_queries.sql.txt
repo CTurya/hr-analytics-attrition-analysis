@@ -1,0 +1,54 @@
+QUERY 1
+
+SELECT 
+  COUNT(*) AS total_employees,
+  SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END) AS employees_left,
+  ROUND(100.0 * SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END) / COUNT(*), 2) AS attrition_rate_pct
+FROM `WA_Fn-UseC_-HR-Employee-Attrition`;
+
+
+QUERY 2
+
+SELECT 
+  Department,
+  COUNT(*) AS total_employees,
+  SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END) AS employees_left,
+  ROUND(100.0 * SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END) / COUNT(*), 2) AS attrition_rate_pct
+FROM `WA_Fn-UseC_-HR-Employee-Attrition`
+GROUP BY Department
+ORDER BY attrition_rate_pct DESC;
+
+
+QUERY 3
+
+SELECT 
+  CASE 
+    WHEN MonthlyIncome < 3000 THEN 'Low (Under $3k)'
+    WHEN MonthlyIncome BETWEEN 3000 AND 6000 THEN 'Medium ($3k-$6k)'
+    WHEN MonthlyIncome BETWEEN 6001 AND 10000 THEN 'High ($6k-$10k)'
+    ELSE 'Very High (Over $10k)'
+  END AS salary_band,
+  COUNT(*) AS total_employees,
+  SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END) AS employees_left,
+  ROUND(100.0 * SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END) / COUNT(*), 2) AS attrition_rate_pct
+FROM `WA_Fn-UseC_-HR-Employee-Attrition`
+GROUP BY salary_band
+ORDER BY attrition_rate_pct DESC;
+
+
+QUERY 4
+
+SELECT 
+  CASE 
+    WHEN Age < 25 THEN 'Under 25'
+    WHEN Age BETWEEN 25 AND 34 THEN '25-34'
+    WHEN Age BETWEEN 35 AND 44 THEN '35-44'
+    WHEN Age BETWEEN 45 AND 54 THEN '45-54'
+    ELSE 'Over 55'
+  END AS age_group,
+  COUNT(*) AS total_employees,
+  SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END) AS employees_left,
+  ROUND(100.0 * SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END) / COUNT(*), 2) AS attrition_rate_pct
+FROM `WA_Fn-UseC_-HR-Employee-Attrition`
+GROUP BY age_group
+ORDER BY attrition_rate_pct DESC;
